@@ -25,6 +25,7 @@ services:
       SMTP_HOST: smtp.example.com
       SMTP_USER: user@example.com
       SMTP_PASS: password
+      SMTP_PORT: 587                    # optional, defaults to 587 (465 = SSL)
       SMTP_FROM: noreply@example.com    # optional, defaults to SMTP_USER
       SMTP_FROM_NAME: My Site           # optional, defaults to WP site name
 ```
