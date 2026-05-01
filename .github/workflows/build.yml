@@ -1,0 +1,53 @@
+name: Build & Push
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check if wordpress:latest changed
+        id: check
+        run: |
+          docker pull wordpress:latest
+          DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' wordpress:latest)
+          echo "digest=$DIGEST" >> $GITHUB_OUTPUT
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            CACHED=$(cat .wordpress-digest 2>/dev/null || echo "none")
+            if [ "$DIGEST" = "$CACHED" ]; then
+              echo "skip=true" >> $GITHUB_OUTPUT
+            else
+              echo "skip=false" >> $GITHUB_OUTPUT
+              echo "$DIGEST" > .wordpress-digest
+            fi
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build & push
+        if: steps.check.outputs.skip != 'true'
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/painteau/wordpress:latest
+            ghcr.io/painteau/wordpress:${{ github.sha }}
