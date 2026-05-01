@@ -15,14 +15,20 @@ ghcr.io/painteau/wordpress:latest
 ## Usage
 
 Remplacer `wordpress:latest` par `ghcr.io/painteau/wordpress:latest` dans les docker-compose.
-Le volume `uploads.ini` n'est plus nécessaire.
 
 ```yaml
 services:
   wordpress:
     image: ghcr.io/painteau/wordpress:latest
-    ...
+    environment:
+      SMTP_HOST: smtp.example.com
+      SMTP_USER: user@example.com
+      SMTP_PASS: motdepasse
+      SMTP_FROM: noreply@example.com       # optionnel, défaut = SMTP_USER
+      SMTP_FROM_NAME: Mon Site             # optionnel, défaut = nom du site WP
 ```
+
+Le volume `uploads.ini` n'est plus nécessaire non plus.
 
 ## Build automatique
 
