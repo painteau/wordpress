@@ -4,6 +4,7 @@ Image Docker WordPress personnalisée, basée sur `wordpress:latest` (Apache), a
 
 - **WP-CLI** pré-installé (`wp` disponible dans le conteneur)
 - **uploads.ini** configuré (500MB upload, 600s exec)
+- **MU-plugin SMTP** — configure PHPMailer via env vars Docker (`SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`, `SMTP_FROM_NAME`)
 
 ## Image
 
