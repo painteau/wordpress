@@ -21,8 +21,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: git.breizhzion.com
-          username: ${{ forgejo.actor }}
-          password: ${{ forgejo.token }}
+          username: painteau
+          password: ${{ secrets.REGISTRY_TOKEN }}
 
       - name: Check if wordpress:latest changed
         id: check
