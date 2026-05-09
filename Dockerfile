@@ -5,4 +5,5 @@ RUN curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cl
     && mv wp-cli.phar /usr/local/bin/wp
 
 COPY uploads.ini /usr/local/etc/php/conf.d/uploads.ini
-COPY mu-plugins/ /usr/src/wordpress/wp-content/mu-plugins/
+COPY --chown=www-data:www-data mu-plugins/ /usr/src/wordpress/wp-content/mu-plugins/
+COPY --chown=www-data:www-data mu-plugins/ /var/www/html/wp-content/mu-plugins/
