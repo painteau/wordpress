@@ -5,6 +5,7 @@ Custom WordPress Docker image based on `wordpress:latest` (Apache), with:
 - **WP-CLI** pre-installed (`wp` available in the container)
 - **uploads.ini** configured (500MB upload, 600s execution time)
 - **SMTP MU-plugin** — configures PHPMailer via Docker environment variables (`SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`, `SMTP_FROM_NAME`)
+- **phpredis** (C extension) — faster Redis support for the Redis Object Cache plugin
 
 ## Image
 
