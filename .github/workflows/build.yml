@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
 
     steps:
@@ -42,7 +42,6 @@ jobs:
               echo "skip=true" >> $GITHUB_OUTPUT
             else
               echo "skip=false" >> $GITHUB_OUTPUT
-              echo "$DIGEST" > .wordpress-digest
             fi
           else
             echo "skip=false" >> $GITHUB_OUTPUT
@@ -58,3 +57,14 @@ jobs:
           tags: |
             ghcr.io/painteau/wordpress:latest
             ghcr.io/painteau/wordpress:${{ github.sha }}
+
+      - name: Save digest for next scheduled run
+        if: steps.check.outputs.skip != 'true'
+        run: |
+          echo "${{ steps.check.outputs.digest }}" > .wordpress-digest
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .wordpress-digest
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: update cached wordpress:latest digest [skip ci]"
+          git push
