@@ -1,4 +1,9 @@
 <?php
+/*
+ * Extension WordPress : appelle les API de WordPress, donc oeuvre derivee de WordPress.
+ * Sous GPLv2 ou ulterieure, et pas sous la BZ-1.1 du reste de ce depot (voir LICENSE.md).
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ */
 /**
  * Plugin Name: SMTP Config
  * Description: Configure PHPMailer via Docker environment variables (SMTP_HOST, SMTP_USER, SMTP_PASS, SMTP_FROM, SMTP_FROM_NAME, SMTP_PORT).

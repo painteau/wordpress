@@ -12,6 +12,22 @@ L'historique git reste la source de vérité pour ce qui précède.
 
 ## [Unreleased]
 
+### Ajouté
+
+- **Licence BZ-1.1 sur le `Dockerfile` et la configuration**, avec une portée écrite en
+  tête du fichier. Ce dépôt était public sans aucune licence, ce que la convention du
+  parc interdit. Un Dockerfile n'est pas une œuvre dérivée de l'image qu'il construit :
+  c'est une recette, pas du code lié, donc rien n'est repris de l'image `wordpress`
+  officielle.
+- **`mu-plugins/disable-updates.php` et `mu-plugins/smtp.php` marqués GPLv2 ou
+  ultérieure** (en-tête SPDX), et exclus nommément de la licence du dépôt. Ce sont des
+  extensions WordPress : elles appellent les API de WordPress, et du PHP qui fait cela est
+  tenu par la position dominante de l'écosystème pour une œuvre dérivée de WordPress,
+  donc redevable d'une licence compatible GPL — ce que BZ-1.1 n'est pas. La position ne
+  s'est jamais tranchée en justice et se conteste, mais sur un dépôt public ce n'est pas
+  le pari à prendre, et l'exclusion coûte deux commentaires.
+
+
 ## [0.1.0] - 2026-09-05
 
 ### Modifié
