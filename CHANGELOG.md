@@ -12,6 +12,13 @@ L'historique git reste la source de vérité pour ce qui précède.
 
 ## [Unreleased]
 
+### Sécurité
+
+- **`session.upload_progress.enabled = 0`** dans `uploads.ini` : c'est le chemin d'exploitation
+  confirmé de CVE-2026-109619 (PHP2Shell, RCE sans authentification, 2026-10-21), et WordPress ne
+  s'en sert pas. Image reconstruite le jour même sur un `wordpress:latest` qui embarque le PHP
+  corrigé.
+
 ### Modifié
 
 - **`actions/checkout` et `actions/setup-node` passent en v7** dans les workflows : les versions
